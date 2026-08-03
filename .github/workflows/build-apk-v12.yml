@@ -18,19 +18,8 @@ jobs:
 
       - name: Apply version 1.1 source layer
         run: |
-          cp patch_new/MainActivity.kt app/src/main/java/com/cardinalich/kardinalgrab/MainActivity.kt
-          cp patch_new/DownloadsActivity.kt app/src/main/java/com/cardinalich/kardinalgrab/DownloadsActivity.kt
-          cp patch_new/LoginActivity.kt app/src/main/java/com/cardinalich/kardinalgrab/LoginActivity.kt
-          cp patch_new/SplashActivity.kt app/src/main/java/com/cardinalich/kardinalgrab/SplashActivity.kt
-          cp patch_new/UiKit.kt app/src/main/java/com/cardinalich/kardinalgrab/UiKit.kt
-          cp patch_new/AndroidManifest.xml app/src/main/AndroidManifest.xml
-          cp patch_new/app-build.gradle.kts app/build.gradle.kts
-          cp patch_new/launcher_foreground.xml app/src/main/res/drawable/launcher_foreground.xml
-          cp patch_new/raven_icon.xml app/src/main/res/drawable/raven_icon.xml
-          cp patch_new/launcher_logo.jpg app/src/main/res/drawable/launcher_logo.jpg
-          cp patch_new/splash_logo.jpg app/src/main/res/drawable/splash_logo.jpg
-          cp patch_new/ic_launcher.xml app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
-          cp patch_new/ic_launcher_round.xml app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
+          cat build-patches/inst100gramm-v1.1.part* > /tmp/inst100gramm-v1.1.patch
+          patch -p1 < /tmp/inst100gramm-v1.1.patch
 
       - name: Apply version 1.2 source layer
         run: |
