@@ -1,0 +1,37 @@
+_foreground.xml
+--- old/app/src/main/res/drawable/launcher_foreground.xml	2026-08-03 06:26:25.000000000 +0000
++++ new/app/src/main/res/drawable/launcher_foreground.xml	2026-08-03 07:51:25.381834027 +0000
+@@ -1,8 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+-    <item android:left="20dp" android:top="20dp" android:right="20dp" android:bottom="20dp">
+-        <bitmap
+-            android:gravity="center"
+-            android:src="@drawable/launcher_logo" />
+-    </item>
++    <item android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp"
++        android:drawable="@drawable/raven_icon" />
+ </layer-list>
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/res/drawable/raven_icon.xml new/app/src/main/res/drawable/raven_icon.xml
+--- old/app/src/main/res/drawable/raven_icon.xml	1970-01-01 00:00:00.000000000 +0000
++++ new/app/src/main/res/drawable/raven_icon.xml	2026-08-03 07:51:24.653834050 +0000
+@@ -0,0 +1,90 @@
++<?xml version="1.0" encoding="utf-8"?>
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="108dp"
++    android:height="108dp"
++    android:viewportWidth="108"
++    android:viewportHeight="108">
++
++    <!-- Cardinal red motion ring -->
++    <path
++        android:fillColor="#C20D18"
++        android:pathData="M10,70 C19,91 47,101 75,94 C90,90 100,79 104,65 C96,77 84,84 69,87 C43,92 23,84 10,70 Z" />
++    <path
++        android:fillColor="#E01924"
++        android:pathData="M23,21 C50,6 83,13 99,35 C83,22 60,18 39,24 C29,27 20,32 12,40 C14,32 18,26 23,21 Z" />
++
++    <!-- Left wing, feathered silhouette -->
++    <path
++        android:fillColor="#0B0D12"
++        an
