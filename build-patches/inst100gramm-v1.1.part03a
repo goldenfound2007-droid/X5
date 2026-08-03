@@ -1,0 +1,50 @@
+ab/LoginActivity.kt	2026-08-03 06:28:59.000000000 +0000
++++ new/app/src/main/java/com/cardinalich/kardinalgrab/LoginActivity.kt	2026-08-03 07:45:16.057845733 +0000
+@@ -100,7 +100,7 @@
+         root.addView(footer)
+ 
+         root.addView(TextView(this).apply {
+-            text = "Cardinalich Software • сессия остаётся только внутри приложения"
++            text = "Ин100грамм • Cardinalich Software • сессия остаётся только внутри приложения"
+             textSize = 10f
+             gravity = Gravity.CENTER
+             setTextColor(MUTED)
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/java/com/cardinalich/kardinalgrab/MainActivity.kt new/app/src/main/java/com/cardinalich/kardinalgrab/MainActivity.kt
+--- old/app/src/main/java/com/cardinalich/kardinalgrab/MainActivity.kt	2026-08-03 06:28:28.000000000 +0000
++++ new/app/src/main/java/com/cardinalich/kardinalgrab/MainActivity.kt	2026-08-03 07:51:25.205834032 +0000
+@@ -45,6 +45,20 @@
+     private lateinit var shareButton: Button
+     private var lastSavedUri: Uri? = null
+     private var lastMime = "video/mp4"
++    private var lastDownloadPhrase = ""
++
++    private val downloadPhrases = listOf(
++        "Что качаем в этот раз?",
++        "Ворон, тащи добычу!",
++        "Утащить видео в телефон",
++        "Ну что, хапаем?",
++        "Забрать себе",
++        "Клювом — и в загрузки",
++        "Пора нести добычу",
++        "Схватить и сохранить",
++        "Тащим это видео?",
++        "Добыча замечена. Берём?"
++    )
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -75,21 +89,21 @@
+         scroll.addView(root)
+ 
+         root.addView(ImageView(this).apply {
+-            setImageResource(R.drawable.splash_logo)
++            setImageResource(R.drawable.raven_icon)
+             scaleType = ImageView.ScaleType.CENTER_INSIDE
+-            contentDescription = "Cardinalich Software"
+-        }, LinearLayout.LayoutParams(-1, dp(150)))
++            contentDescription = "Ин100грамм — Cardinalich Software"
++        }, LinearLayout.LayoutParams(-1, dp(178)))
+ 
+         root.addView(TextView(this).apply {
+-            text = "КАРДИНАЛЬНЫЙ ХВАТ"
+-         
