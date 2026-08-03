@@ -1,0 +1,44 @@
+re.Downloads.RELATIVE_PATH}=?)"
++                val selectionArgs = arrayOf(newFolderPath, legacyFolderPath)
+                 contentResolver.query(
+                     MediaStore.Downloads.EXTERNAL_CONTENT_URI,
+                     projection,
+@@ -154,19 +160,23 @@
+                     val dateIndex = cursor.getColumnIndexOrThrow(MediaStore.Downloads.DATE_ADDED)
+                     while (cursor.moveToNext()) {
+                         val id = cursor.getLong(idIndex)
++                        val uri = ContentUris.withAppendedId(MediaStore.Downloads.EXTERNAL_CONTENT_URI, id)
++                        val mime = cursor.getString(mimeIndex) ?: "video/mp4"
+                         loaded += DownloadedItem(
+-                            uri = ContentUris.withAppendedId(MediaStore.Downloads.EXTERNAL_CONTENT_URI, id),
++                            uri = uri,
+                             name = cursor.getString(nameIndex) ?: "Видео Instagram",
+-                            mime = cursor.getString(mimeIndex) ?: "video/mp4",
++                            mime = mime,
+                             size = cursor.getLong(sizeIndex),
+-                            dateAddedSeconds = cursor.getLong(dateIndex)
++                            dateAddedSeconds = cursor.getLong(dateIndex),
++                            thumbnail = if (mime.startsWith("video/")) createThumbnail(uri) else null
+                         )
+                     }
+                 }
+             } catch (_: Exception) {
+-                // Ошибка будет отражена пустым списком, чтобы экран не падал.
++                // Экран останется рабочим даже при проблемном или удалённом файле.
+             }
+             runOnUiThread {
++                items.forEach { it.thumbnail?.recycle() }
+                 items.clear()
+                 items.addAll(loaded)
+                 renderItems()
+@@ -176,16 +186,27 @@
+         }
+     }
+ 
++    private fun createThumbnail(uri: Uri): Bitmap? {
++        val retriever = MediaMetadataRetriever()
++        return try {
++            retriever.setDataSource(this, uri)
++            retriever.getScaledFrameAtTime(
++                1_000_000L,
++                MediaMetadataRetriever.OPTION
