@@ -1,0 +1,56 @@
+ = dp(14) })
+ 
+         root.addView(TextView(this).apply {
+-            text = "CARDINALICH SOFTWARE\nАвторская разработка • © 2026\nСессия хранится только на этом телефоне"
++            text = "ИН100ГРАММ — CARDINALICH SOFTWARE\nАвторская разработка • © 2026\nСессия хранится только на этом телефоне"
+             textSize = 12f
+             gravity = Gravity.CENTER
+             setTextColor(MUTED)
+             setPadding(dp(8), dp(20), dp(8), 0)
+             setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+-            letterSpacing = 0.05f
++            letterSpacing = 0.045f
+         })
+ 
+         refreshAuthStatus()
+@@ -204,7 +217,7 @@
+     private fun refreshAuthStatus() {
+         if (!::authStatus.isInitialized) return
+         val ok = hasSession()
+-        authStatus.text = if (ok) "● Вход выполнен — Хват готов" else "● Сначала войдите в Instagram"
++        authStatus.text = if (ok) "● Вход выполнен — ворон готов" else "● Сначала войдите в Instagram"
+         authStatus.setTextColor(if (ok) GREEN else CARDINAL_RED)
+     }
+ 
+@@ -224,7 +237,8 @@
+             linkInput.setText(url)
+             linkInput.setSelection(url.length)
+             message.setTextColor(GREEN)
+-            message.text = "Ссылка поймана. Осталось нажать «Скачать»."
++            message.text = "Ссылка поймана. Осталось нажать большую кнопку."
++            setNewDownloadPhrase()
+         }
+     }
+ 
+@@ -242,9 +256,14 @@
+ 
+         setBusy(true)
+         message.setTextColor(MUTED)
+-        message.text = "Кардинальный Хват вышел на охоту…"
++        message.text = listOf(
++            "Ворон вылетел за добычей…",
++            "Клюв занят. Тащим видео…",
++            "Ин100грамм работает — не спугни ворона…",
++            "Добыча схвачена, несём в телефон…"
++        ).random()
+         val ua = WebSettings.getDefaultUserAgent(this)
+-        val tempDir = File(cacheDir, "cardinal_grab").apply {
++        val tempDir = File(cacheDir, "inst100gramm_cache").apply {
+             deleteRecursively()
+             mkdirs()
+         }
+@@ -270,7 +289,7 @@
+                     lastSavedUri = saved.first
+                     lastMime = saved.second
+                     message.setTextColor(GREEN)
+-     
