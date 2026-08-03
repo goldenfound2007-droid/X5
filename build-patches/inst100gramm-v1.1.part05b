@@ -1,0 +1,56 @@
+        text = "КАРДИНАЛЬНЫЙ ХВАТ"
+-            textSize = 27f
++            text = "ИН100ГРАММ"
++            textSize = 30f
+             gravity = Gravity.CENTER
+             setTextColor(CARDINAL_RED)
+             setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+             letterSpacing = 0.06f
+         })
+         root.addView(TextView(this).apply {
+-            text = "Хвать ссылку — тащи видео"
++            text = "Ворон хватает — телефон получает"
+             textSize = 15f
+             gravity = Gravity.CENTER
+             setTextColor(INK)
+@@ -54,24 +54,16 @@
+             setTextColor(MUTED)
+         })
+         setContentView(root)
+-
+-        val fastStart = intent.action == Intent.ACTION_SEND || intent.action == Intent.ACTION_VIEW
+-        handler.postDelayed(opener, if (fastStart) 220L else 1800L)
++        handler.postDelayed(opener, 1650L)
+     }
+ 
+     private fun openMain() {
+         if (opened) return
+         opened = true
+         handler.removeCallbacks(opener)
+-        val source = intent
+-        val next = Intent(this, MainActivity::class.java).apply {
+-            action = source.action
+-            type = source.type
+-            data = source.data
+-            source.extras?.let { putExtras(it) }
++        startActivity(Intent(this, MainActivity::class.java).apply {
+             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+-        }
+-        startActivity(next)
++        })
+         finish()
+     }
+ 
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/python/downloader.py new/app/src/main/python/downloader.py
+--- old/app/src/main/python/downloader.py	2026-08-03 06:30:07.000000000 +0000
++++ new/app/src/main/python/downloader.py	2026-08-03 07:45:16.593845716 +0000
+@@ -27,7 +27,7 @@
+ 
+     lines = [
+         '# Netscape HTTP Cookie File',
+-        '# Generated locally by Cardinalny Hvat / Cardinalich Software',
++        '# Generated locally by Ин100грамм / Cardinalich Software',
+     ]
+     for name, value in cookies:
+         domain = '.instagram.com'
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/res/drawable/launcher_foreground.xml new/app/src/main/res/drawable/launcher
