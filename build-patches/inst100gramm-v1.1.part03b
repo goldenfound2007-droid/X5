@@ -1,0 +1,45 @@
+   textSize = 28f
++            text = "ИН100ГРАММ"
++            textSize = 31f
+             gravity = Gravity.CENTER
+             setTextColor(CARDINAL_RED)
+             setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+-            letterSpacing = 0.05f
++            letterSpacing = 0.055f
+         })
+         root.addView(TextView(this).apply {
+-            text = "Ссылка попалась — видео не уйдёт"
++            text = "Ворон увидел ссылку — добыча уже почти в телефоне"
+             textSize = 14f
+             gravity = Gravity.CENTER
+             setTextColor(MUTED)
+@@ -115,7 +129,7 @@
+         val downloadCard = card(top = 14)
+         downloadCard.addView(sectionLabel("ССЫЛКА НА REELS ИЛИ ПУБЛИКАЦИЮ"))
+         linkInput = EditText(this).apply {
+-            hint = "Ссылка подставится сама через «Поделиться»"
++            hint = "Ссылка сама прилетит сюда через «Поделиться»"
+             textSize = 16f
+             setTextColor(INK)
+             setHintTextColor(Color.rgb(142, 147, 163))
+@@ -126,19 +140,18 @@
+         }
+         downloadCard.addView(linkInput, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(10) })
+ 
+-        val utilityRow = LinearLayout(this).apply {
+-            orientation = LinearLayout.HORIZONTAL
+-        }
++        val utilityRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+         utilityRow.addView(secondaryButton("Вставить") { pasteFromClipboard() },
+             LinearLayout.LayoutParams(0, dp(49), 1f).apply { marginEnd = dp(5) })
+         utilityRow.addView(secondaryButton("Очистить") {
+             linkInput.text.clear()
+-            message.text = "В Instagram нажми «Поделиться» и выбери «Кардинальный Хват»."
++            message.text = "В Instagram нажми «Поделиться» и выбери «Ин100грамм»."
+             message.setTextColor(MUTED)
++            setNewDownloadPhrase()
+         }, LinearLayout.LayoutParams(0, dp(49), 1f).apply { marginStart = dp(5) })
+         downloadCard.addView(utilityRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(9) })
+ 
+-        downloadButton = primaryButton("СКАЧАТЬ НА ТЕЛЕФОН") { startDownload() }
++        downloadButton = primaryButton(nextDownloadPhrase()) { sta
