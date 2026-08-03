@@ -1,0 +1,57 @@
+_CLOSEST_SYNC,
++                480,
++                270
++            ) ?: retriever.getFrameAtTime(0L, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
++        } catch (_: Exception) {
++            null
++        } finally {
++            try { retriever.release() } catch (_: Exception) {}
++        }
++    }
++
+     private fun renderItems() {
+         listBox.removeAllViews()
+         if (items.isEmpty()) {
+-            emptyText = TextView(this).apply {
+-                text = "Пока пусто. Кардинальный Хват ещё ничего не утащил."
+-                textSize = 16f
+-                gravity = Gravity.CENTER
+-                setTextColor(MUTED)
+-                setPadding(dp(20), dp(70), dp(20), dp(30))
+-            }
++            emptyText = makeEmptyText()
+             listBox.addView(emptyText)
+             return
+         }
+@@ -197,9 +218,23 @@
+     }
+ 
+     private fun buildItemCard(item: DownloadedItem): View {
+-        val card = card().apply {
+-            setOnClickListener { open(item) }
++        val card = card().apply { setOnClickListener { open(item) } }
++
++        val preview = ImageView(this).apply {
++            contentDescription = "Предпросмотр ${item.name}"
++            background = rounded(Color.rgb(18, 20, 28), Color.rgb(218, 221, 234), 16, 1)
++            clipToOutline = true
++            if (item.thumbnail != null) {
++                setImageBitmap(item.thumbnail)
++                scaleType = ImageView.ScaleType.CENTER_CROP
++            } else {
++                setImageResource(R.drawable.raven_icon)
++                scaleType = ImageView.ScaleType.CENTER_INSIDE
++                setPadding(dp(35), dp(18), dp(35), dp(18))
++            }
+         }
++        card.addView(preview, LinearLayout.LayoutParams(-1, dp(188)).apply { bottomMargin = dp(12) })
++
+         card.addView(TextView(this).apply {
+             text = item.name
+             textSize = 15f
+@@ -245,7 +280,7 @@
+         val send = Intent(Intent.ACTION_SEND).apply {
+             type = item.mime
+             putExtra(Intent.EXTRA_STREAM, item.uri)
+-            putExtra(Intent.EXTRA_TEXT, "Скачано приложением «Кардинальный Хват» — Cardinalich Software")
++            putExtra(Intent.EXTRA_TEX
