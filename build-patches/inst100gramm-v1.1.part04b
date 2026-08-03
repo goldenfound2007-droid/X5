@@ -1,0 +1,39 @@
+               message.text = "Добыча взята. Файл лежит в Download/Кардинальный Хват."
++                    message.text = "Добыча доставлена. Файл лежит в Download/Ин100грамм."
+                     openButton.visibility = View.VISIBLE
+                     shareButton.visibility = View.VISIBLE
+                     setBusy(false)
+@@ -301,7 +320,7 @@
+         val values = ContentValues().apply {
+             put(MediaStore.Downloads.DISPLAY_NAME, displayName)
+             put(MediaStore.Downloads.MIME_TYPE, mime)
+-            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Кардинальный Хват")
++            put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/Ин100грамм")
+             put(MediaStore.Downloads.IS_PENDING, 1)
+         }
+         val uri = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+@@ -342,7 +361,7 @@
+         val send = Intent(Intent.ACTION_SEND).apply {
+             type = mime
+             putExtra(Intent.EXTRA_STREAM, uri)
+-            putExtra(Intent.EXTRA_TEXT, "Скачано приложением «Кардинальный Хват» — Cardinalich Software")
++            putExtra(Intent.EXTRA_TEXT, "Скачано приложением «Ин100грамм» — Cardinalich Software")
+             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+         }
+         startActivity(Intent.createChooser(send, "Отправить видео через WhatsApp, MAX или другое приложение"))
+@@ -359,8 +378,12 @@
+             linkInput.setText(it)
+             linkInput.setSelection(it.length)
+             message.setTextColor(GREEN)
+-            message.text = "Ссылка подхвачена из Instagram. Осталось нажать «Скачать»."
++            message.text = "Ссылка подхвачена из Instagram. Осталось нажать большую кнопку."
++            setNewDownloadPhrase()
+         }
++        // Не оставляем старый SEND/VIEW intent активным: при возврате из списка последних
++        // Android не будет повторно создавать или повторно обрабатывать «копию» запуска.
++        setIntent(Intent(this, MainActivity::class.java))
+     }
+ 
+     private fun extractInstagramUrl(raw: String): String? {
+@@ -368,6 +391,18 @@
+         return regex.find(raw.trim())?.value?.trimEnd('.', ',', ')',
