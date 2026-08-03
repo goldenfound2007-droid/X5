@@ -1,0 +1,42 @@
+R_INSIDE
+-        }, LinearLayout.LayoutParams(-1, dp(210)))
++        }, LinearLayout.LayoutParams(-1, dp(220)))
+         box.addView(TextView(this).apply {
+-            text = "КАРДИНАЛЬНЫЙ ХВАТ"
+-            textSize = 22f
++            text = "ИН100ГРАММ"
++            textSize = 24f
+             gravity = Gravity.CENTER
+             setTextColor(CARDINAL_RED)
+             setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+         })
+         box.addView(TextView(this).apply {
+-            text = "Версия 1.0\n\nАвтор и разработчик:\nCARDINALICH SOFTWARE\n\nХвать ссылку — тащи видео.\nСделано с характером и без зависимости от компьютера.\n\n© 2026 Cardinalich Software"
++            text = "Версия 1.1\n\nАвтор и разработчик:\nCARDINALICH SOFTWARE\n\nВорон хватает ссылку и тащит видео прямо в телефон.\nСделано с характером, юмором и без зависимости от компьютера.\n\n© 2026 Cardinalich Software"
+             textSize = 14f
+             gravity = Gravity.CENTER
+             setTextColor(INK)
+@@ -442,7 +478,7 @@
+         })
+         AlertDialog.Builder(this)
+             .setView(box)
+-            .setPositiveButton("Кардинально понятно", null)
++            .setPositiveButton("Понял, ворон главный", null)
+             .show()
+     }
+ 
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/java/com/cardinalich/kardinalgrab/SplashActivity.kt new/app/src/main/java/com/cardinalich/kardinalgrab/SplashActivity.kt
+--- old/app/src/main/java/com/cardinalich/kardinalgrab/SplashActivity.kt	2026-08-03 06:27:26.000000000 +0000
++++ new/app/src/main/java/com/cardinalich/kardinalgrab/SplashActivity.kt	2026-08-03 07:51:25.209834032 +0000
+@@ -28,20 +28,20 @@
+             setOnClickListener { openMain() }
+         }
+         root.addView(ImageView(this).apply {
+-            setImageResource(com.cardinalich.kardinalgrab.R.drawable.splash_logo)
++            setImageResource(R.drawable.raven_icon)
+             scaleType = ImageView.ScaleType.CENTER_INSIDE
+-            contentDescription = "Cardinalich Software"
++            contentDescription = "Ин100грамм — Cardinalich Software"
+         }, LinearLayout.LayoutParams(-1, 0, 1f))
+         root.addView(TextView(this).apply {
+-    
