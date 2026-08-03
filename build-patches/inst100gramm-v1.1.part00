@@ -1,0 +1,106 @@
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/CHANGELOG.md new/CHANGELOG.md
+--- old/CHANGELOG.md	2026-08-03 06:30:07.000000000 +0000
++++ new/CHANGELOG.md	2026-08-03 07:45:17.277845694 +0000
+@@ -1,10 +1,16 @@
+ # История версий
+ 
++## 1.1 — Ин100грамм
++
++- приложение переименовано из «Кардинального Хвата» в «Ин100грамм»;
++- установлен новый ярлык и сплэш с летящим вороном, несущим видеодобычу;
++- добавлены случайные шуточные надписи на кнопке скачивания;
++- добавлены кадры-превью в разделе загрузок;
++- новые файлы сохраняются в `Download/Ин100грамм`;
++- старые загрузки из `Download/Кардинальный Хват` остаются видимыми;
++- MainActivity переведена в `singleTask`, отправка ссылок больше не плодит копии окон;
++- сохранено заметное авторство Cardinalich Software.
++
+ ## 1.0
+ 
+-- Первый автономный Android-релиз.
+-- Встроенный вход Instagram.
+-- Получение ссылки из меню «Поделиться».
+-- Скачивание прямо на телефон.
+-- Экран «Моя добыча» с открытием, отправкой и удалением файлов.
+-- Фирменное оформление Cardinalich Software.
++- первая автономная Android-версия.
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/README.md new/README.md
+--- old/README.md	2026-08-03 06:30:07.000000000 +0000
++++ new/README.md	2026-08-03 07:45:17.277845694 +0000
+@@ -1,32 +1,22 @@
+-# Кардинальный Хват
++# Ин100грамм
+ 
+ Автономное Android-приложение от **Cardinalich Software** для сохранения доступных пользователю видео Instagram прямо на телефон.
+ 
+-## Возможности
++## Возможности версии 1.1
+ 
+ - внутренняя авторизация Instagram через WebView;
+ - приём ссылки через системную кнопку **«Поделиться»** в Instagram;
+-- автоматическая подстановка ссылки: остаётся нажать **«Скачать»**;
+-- сохранение в `Download/Кардинальный Хват`;
+-- список ранее скачанных файлов;
++- автоматическая подстановка ссылки: остаётся нажать большую кнопку;
++- случайные шуточные подписи кнопки загрузки;
++- сохранение в `Download/Ин100грамм`;
++- список ранее скачанных файлов, включая старую папку `Кардинальный Хват`;
++- предпросмотр кадра каждого видео;
+ - открытие, отправка через WhatsApp, MAX и другие приложения;
+ - удаление одного файла или полной истории загрузок;
+-- сплэш и ярлык с фирменным логотипом Cardinalich Software;
++- новый фирменный ярлык: летящий ворон с добычей;
++- один экземпляр приложения: повторное «Поделиться» передаёт ссылку в уже открытое окно;
+ - без компьютера, локального сервера и PIN.
+ 
+-## Сборка
+-
+-GitHub Actions автоматически собирает установочный debug APK при каждом push в `main`.
+-Откройте вкладку **Actions**, выберите последний успешный запуск и скачайте артефакт `Cardinalny-Hvat-APK`.
+-
+-Для локальной сборки нужны Android SDK 35, JDK 17, Python 3.13 и Gradle 8.9:
+-
+-```bash
+-gradle :app:assembleDebug
+-```
+-
+-## Важно
+-
+-Приложение использует только сессию аккаунта, в который пользователь самостоятельно вошёл внутри приложения. Закрытая публикация доступна только тогда, когда этот аккаунт имеет право её просматривать. Не используйте массовую автоматическую загрузку и соблюдайте права владельцев материалов и правила сервиса.
++Пакет оставлен прежним: `com.cardinalich.kardinalgrab`, чтобы приложение продолжало ту же линию версий.
+ 
+ © 2026 Cardinalich Software
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/build.gradle.kts new/app/build.gradle.kts
+--- old/app/build.gradle.kts	2026-08-03 06:26:25.000000000 +0000
++++ new/app/build.gradle.kts	2026-08-03 07:45:17.113845699 +0000
+@@ -12,8 +12,8 @@
+         applicationId = "com.cardinalich.kardinalgrab"
+         minSdk = 29
+         targetSdk = 35
+-        versionCode = 1
+-        versionName = "1.0"
++        versionCode = 2
++        versionName = "1.1"
+ 
+         ndk {
+             // Современные Android-телефоны. Это уменьшает размер APK.
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/AndroidManifest.xml new/app/src/main/AndroidManifest.xml
+--- old/app/src/main/AndroidManifest.xml	2026-08-03 06:26:25.000000000 +0000
++++ new/app/src/main/AndroidManifest.xml	2026-08-03 07:45:16.165845729 +0000
+@@ -7,7 +7,7 @@
+         android:allowBackup="false"
+         android:icon="@mipmap/ic_launcher"
+         android:roundIcon="@mipmap/ic_launcher_round"
+-        android:label="Кардинальный Хват"
++        android:label="Ин100грамм"
+         android:networkSecurityConfig="@xml/network_security_config"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.CardinalnyHvat"
+@@ -21,24 +21,16 @@
+         <activity
+             android:name=".DownloadsActivity"
+             android:exported="false"
+-            android:screenOrientation="portrait" />
+-
+-        <activity
+-            android:name=".MainActivi
