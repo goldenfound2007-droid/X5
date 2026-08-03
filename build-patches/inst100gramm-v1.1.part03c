@@ -1,0 +1,27 @@
+rtDownload() }
+         downloadCard.addView(downloadButton, LinearLayout.LayoutParams(-1, dp(58)).apply { topMargin = dp(11) })
+ 
+         progress = ProgressBar(this).apply {
+@@ -148,7 +161,7 @@
+         downloadCard.addView(progress, LinearLayout.LayoutParams(-1, dp(42)).apply { topMargin = dp(7) })
+ 
+         message = TextView(this).apply {
+-            text = "В Instagram нажми «Поделиться» и выбери «Кардинальный Хват». Ссылка появится здесь сама."
++            text = "В Instagram нажми «Поделиться» и выбери «Ин100грамм». Ссылка появится здесь сама."
+             textSize = 14f
+             setTextColor(MUTED)
+             setPadding(0, dp(10), 0, 0)
+@@ -162,9 +175,9 @@
+         root.addView(downloadCard)
+ 
+         val libraryCard = card(top = 14)
+-        libraryCard.addView(sectionLabel("МОЯ ДОБЫЧА"))
++        libraryCard.addView(sectionLabel("МОИ ЗАГРУЗКИ"))
+         libraryCard.addView(TextView(this).apply {
+-            text = "Просматривай, отправляй и удаляй всё, что уже скачано."
++            text = "Кадр-превью, открытие, отправка и удаление уже скачанных файлов."
+             textSize = 14f
+             setTextColor(MUTED)
+             setPadding(0, dp(8), 0, dp(10))
+@@ -188,13 +201,13 @@
+         root.addView(bottomRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin 
