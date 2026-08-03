@@ -1,0 +1,33 @@
+ ']', '}', ';')
+     }
+ 
++    private fun nextDownloadPhrase(): String {
++        val variants = downloadPhrases.filterNot { it == lastDownloadPhrase }
++        lastDownloadPhrase = (variants.ifEmpty { downloadPhrases }).random()
++        return lastDownloadPhrase
++    }
++
++    private fun setNewDownloadPhrase() {
++        if (::downloadButton.isInitialized && downloadButton.isEnabled) {
++            downloadButton.text = nextDownloadPhrase()
++        }
++    }
++
+     private fun humanError(value: String): String {
+         val lower = value.lowercase(Locale.ROOT)
+         return when {
+@@ -387,6 +422,7 @@
+     private fun setBusy(value: Boolean) {
+         downloadButton.isEnabled = !value
+         progress.visibility = if (value) View.VISIBLE else View.GONE
++        downloadButton.text = if (value) "Ворон тащит добычу…" else nextDownloadPhrase()
+         if (value) {
+             openButton.visibility = View.GONE
+             shareButton.visibility = View.GONE
+@@ -423,18 +459,18 @@
+             setPadding(dp(20), dp(10), dp(20), dp(6))
+         }
+         box.addView(ImageView(this).apply {
+-            setImageResource(R.drawable.splash_logo)
++            setImageResource(R.drawable.raven_icon)
+             scaleType = ImageView.ScaleType.CENTE
