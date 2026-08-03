@@ -1,0 +1,33 @@
+T, "Скачано приложением «Ин100грамм» — Cardinalich Software")
+             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+         }
+         startActivity(Intent.createChooser(send, "WhatsApp, MAX или другое приложение"))
+@@ -272,16 +307,13 @@
+         if (items.isEmpty()) return
+         AlertDialog.Builder(this)
+             .setTitle("Удалить всю добычу?")
+-            .setMessage("Будут удалены ${items.size} файл(а/ов) из папки «Кардинальный Хват». Отменить это нельзя.")
++            .setMessage("Будут удалены ${items.size} файл(а/ов), включая старые загрузки «Кардинального Хвата». Отменить это нельзя.")
+             .setNegativeButton("Нет", null)
+             .setPositiveButton("Удалить всё") { _, _ ->
+                 worker.execute {
+                     var removed = 0
+                     items.toList().forEach {
+-                        try {
+-                            removed += contentResolver.delete(it.uri, null, null)
+-                        } catch (_: Exception) {
+-                        }
++                        try { removed += contentResolver.delete(it.uri, null, null) } catch (_: Exception) {}
+                     }
+                     runOnUiThread {
+                         toast("Удалено файлов: $removed")
+@@ -296,6 +328,7 @@
+ 
+     override fun onDestroy() {
+         worker.shutdownNow()
++        items.forEach { it.thumbnail?.recycle() }
+         super.onDestroy()
+     }
+ }
+diff -ruN -x '*.jpg' -x build-apk.yml -x __pycache__ old/app/src/main/java/com/cardinalich/kardinalgrab/LoginActivity.kt new/app/src/main/java/com/cardinalich/kardinalgrab/LoginActivity.kt
+--- old/app/src/main/java/com/cardinalich/kardinalgr
