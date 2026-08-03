@@ -1,0 +1,52 @@
+droid:pathData="M57,49 C46,39 36,29 18,17 L26,34 L9,27 L22,43 L6,41 L24,53 L8,57 L31,62 C39,60 48,56 57,52 Z" />
++    <path
++        android:fillColor="#343944"
++        android:pathData="M54,47 C43,40 35,33 24,26 C31,37 39,45 49,51 Z" />
++
++    <!-- Right wing -->
++    <path
++        android:fillColor="#0B0D12"
++        android:pathData="M58,48 C70,34 81,22 95,12 L90,31 L103,22 L95,40 L107,35 L96,50 L107,51 L89,61 C77,58 67,54 58,51 Z" />
++    <path
++        android:fillColor="#343944"
++        android:pathData="M61,47 C73,38 82,29 92,21 C87,35 79,44 67,52 Z" />
++
++    <!-- Raven body and tail -->
++    <path
++        android:fillColor="#11141A"
++        android:pathData="M42,48 C46,38 57,34 67,38 C75,41 79,49 77,57 C75,64 69,68 61,68 C50,68 41,61 42,48 Z" />
++    <path
++        android:fillColor="#171A21"
++        android:pathData="M50,64 L38,83 L51,75 L52,89 L60,72 L67,86 L67,67 Z" />
++
++    <!-- Head, beak and eye -->
++    <path
++        android:fillColor="#090B0F"
++        android:pathData="M61,38 C67,31 78,32 83,39 C86,43 85,48 82,52 C78,55 72,55 68,52 C63,49 60,44 61,38 Z" />
++    <path
++        android:fillColor="#242933"
++        android:pathData="M80,42 L99,49 L82,53 C84,49 84,46 80,42 Z" />
++    <path
++        android:fillColor="#E11421"
++        android:pathData="M74,39 A3,3 0,1 1,73.9 39 Z" />
++    <path
++        android:fillColor="#FFFFFF"
++        android:pathData="M73,38 A1,1 0,1 1,72.9 38 Z" />
++
++    <!-- Claws gripping the reel -->
++    <path
++        android:strokeColor="#08090C"
++        android:strokeWidth="3"
++        android:strokeLineCap="round"
++        android:fillColor="@android:color/transparent"
++        android:pathData="M58,62 C59,69 64,72 68,74 M64,61 C65,68 69,70 73,72" />
++
++    <!-- Film reel prey -->
++    <path
++        android:fillColor="#E8EBEF"
++        android:strokeColor="#555B65"
++        android:strokeWidth="2"
++        android:pathData="M70,61 A19,19 0,1 1,69.9 61 Z" />
++    <path android:fillColor="#20242B" android:pathData="M70,66 A4,4 0,1 1,69.9 66 Z" />
++    <path android:fillColor="#20242B" android:pathData="M80,72 A4,4 0,1 1,79.9 72 Z" />
++    <path android:fillColor="#20242B" android:pathData="M76,84 A4,4 0,1 1,
